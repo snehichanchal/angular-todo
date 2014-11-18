@@ -4,6 +4,7 @@ angular.module('todoApp')
   .controller("MyCtrl",function($scope,$log){
   	//$scope.toggleComplete=false;
   	//$scope.editorEnabled=false;
+  	var col;
 	var local = localStorage.getItem("todoList");
 	if(local) {
 		$scope.todos=JSON.parse(local);					
@@ -18,7 +19,7 @@ angular.module('todoApp')
 	}
 	$scope.addItem=function(){
 		if($scope.item){
-		$scope.todos.push({'title':$scope.item, 'completed':false});
+		$scope.todos.push({'title':$scope.item, 'completed':false,'color':col});
 		$scope.item='';
 		}
 		//$log.info($scope.todos);
@@ -64,7 +65,24 @@ angular.module('todoApp')
 		
 
 //$scope.message="Hello";
-});
+	$scope.setColor=function(bgColor){
+		col=bgColor;
+		
+	};
+	$scope.toggleVisible=function(){
+		var count=0;
+		for(var i=$scope.todos.length-1;i>=0;i--){
+			if($scope.todos[i].completed==true){
+				count++;
+			}
+		}
+		if(count==0){
+			return false;
+		}
+		else{
+			return true;
+		}
 
-	
+	};
+});	
 

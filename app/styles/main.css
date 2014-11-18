@@ -108,5 +108,21 @@ body {
   }
  .toggle{
   color:#333;
+  
+ }
+ .blue{
+  background-color: rgb(73, 73, 241);
+ }
+ .yellow{
+  background-color: yellow;
+ }
+ .red{
+  background-color: red;
+ }
+ .green{
+  background-color: green;
+ }
+ .white{
+  background-color: white;
  }
   

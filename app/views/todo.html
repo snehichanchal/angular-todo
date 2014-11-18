@@ -2,8 +2,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 		
-				<form class="form-inline" role="form" name="frm" ng-submit="addItem()">
-							
+				<form class="form-inline" role="form" name="frm" ng-submit="addItem()">		
 		    		<div class="input-group col-md-12">
 		      			<label class="sr-only" for="exampleInput">input</label>
 						<input type="text" class="form-control input-group input-group-lg" required placeholder="ADD NOTE" ng-model="item" ng-style="myStyle">
@@ -11,11 +10,11 @@
 				</form>	
 				
 				<div class="btn-group btn-group-xs" role="group" aria-label="...">
-					<button type="button" class="btn btn-default btn-primary" ng-model="stylingBtn" ng-click="myStyle={background:'rgb(132, 132, 235)'}"><span class="glyphicon glyphicon-star"></span></button>
-					<button type="button" class="btn btn-default btn-success" ng-model="stylingBtn" ng-click="myStyle={background:'rgb(102, 216, 102)'}"><span class="glyphicon glyphicon-star"></span></button>
-					<button type="button" class="btn btn-default btn-warning" ng-model="stylingBtn" ng-click="myStyle={background:'yellow'}"><span class="glyphicon glyphicon-star"></span></button>
-					<button type="button" class="btn btn-default btn-danger" ng-model="stylingBtn" ng-click="myStyle={background:'rgb(206, 89, 89)'}"><span class="glyphicon glyphicon-star"></span></button>
-					<button type="button" class="btn btn-default btn-default" ng-model="stylingBtn" ng-click="myStyle={background:'white'}"><span class="glyphicon glyphicon-star-empty"></span></button>
+					<button type="button" class="btn btn-default btn-primary" ng-model="myStyle" ng-click="myStyle={background:'rgb(132, 132, 235)'}; setColor('blue')"><span class="glyphicon glyphicon-star"></span></button>
+					<button type="button" class="btn btn-default btn-success" ng-model="stylingBtn" ng-click="myStyle={background:'rgb(102, 216, 102)'}; setColor('green')"><span class="glyphicon glyphicon-star"></span></button>
+					<button type="button" class="btn btn-default btn-warning" ng-model="stylingBtn" ng-click="myStyle={background:'yellow'}; setColor('yellow')"><span class="glyphicon glyphicon-star"></span></button>
+					<button type="button" class="btn btn-default btn-danger" ng-model="stylingBtn" ng-click="myStyle={background:'rgb(206, 89, 89)'}; setColor('red')"><span class="glyphicon glyphicon-star"></span></button>
+					<button type="button" class="btn btn-default btn-default" ng-model="stylingBtn" ng-click="myStyle={background:'white'}; setColor('white')"><span class="glyphicon glyphicon-star-empty"></span></button>
 				</div>
 					
 				<div class="panel panel-body">	
@@ -26,57 +25,63 @@
 								
 									<UL type="square" class="nav nav-pills nav-stacked" >
 									
-										<li  ng-repeat="todo in todos  | filter: {completed:false} | filter:searchText | orderBy: 'title' ">
-											<table class="table">
-											<tr>
-												<div class="checkbox">
-												
-													<input  type="checkbox" ng-click="onComplete(todo.title, true)">
-													<b ng-hide="editorEnable">{{todo.title}}</b>
-											
-												
-												
-													<span class="editBtn">
-														<a class="glyphicon glyphicon-edit" id="edit" ng-click="editorEnable=true" ng-hide="editorEnable"></a>
-													</span>
-													<span class="deletebtn"> 
-														<a  class="glyphicon glyphicon-remove-circle" id="delete" ng-click="RemoveItem(todo.title)"></a>
-													</span>
-	   							 					<div class="row">
-	   							 						<div class="col-md-4 col-md-offset-1">
-	      													<div class="input-group">
-	      									
-																<input class="form-control form-group-sm" ng-model="todo.title"  ng-show="editorEnable">
-																
+										<li  ng-repeat="todo in todos  | filter: {completed:false} | filter:searchText | orderBy: title " ng-class="todo.color">
+											<table class="table table-condensed">
+												<tbody>
+													<tr>
+														<td>	
+															<div class="checkbox">
+														
+																<input  type="checkbox" ng-click="onComplete(todo.title, true)">
+																<b ng-hide="editorEnable">{{todo.title}}</b>
+																<span class="editBtn">
+																	<a class="glyphicon glyphicon-edit" id="edit" ng-click="editorEnable=true" ng-hide="editorEnable"></a>
+																</span>
+																<span class="deletebtn"> 
+																	<a  class="glyphicon glyphicon-remove-circle" id="delete" ng-click="RemoveItem(todo.title)"></a>
+																</span>
+				   							 					
+				      											<div class="input-group">
+				      								
+																	<input class="form-control" ng-model="todo.title"  ng-show="editorEnable">
+																			
 																	<span class="input-group-addon" ng-click="saveEdited(); editorEnable=false" ng-show="editorEnable">
 																		<span class="glyphicon glyphicon-save"></span>
 																	</span>
-																
+																		
+																</div>
 															</div>
-														</div>
-													</div>
-												</div>
-													
-											</tr>
+														</td>		
+													</tr>
+												</tbody>
 											</table>
 										</li>
 										<li>
-											<button class="btn btn-default">
-												<a class="glyphicon glyphicon-retweet"  ng-click="toggleComplete=!toggleComplete"></a>
-											</button>
+											<div class="btn-group col-md-offset-6" data-toggle="button">
+												<label class="btn btn-default btn-xs" ng-show="toggleVisible()">
+													<button class="glyphicon glyphicon-retweet"   autocomplete="off" ng-click="toggleComplete=!toggleComplete"></button>
+												</label>
+											</div>
+
 										</li>
 
 										<li  ng-repeat="todo in todos  | filter: {completed:true} | filter:searchText | orderBy: 'title'" ng-show="toggleComplete">
-											<div class="table">
-												<div class="checkbox">
-													<input type="checkbox" checked="checked" ng-click="onComplete(todo.title, false)">
-													<span class="completeItem">{{todo.title}}</span>
-													
-													<span  class="deletebtn">
-														<a  class="glyphicon glyphicon-remove-circle" id="delete"ng-click="RemoveItem(todo.title)"></a>
-													</span>	
-												</div>
-											</div>	
+											<table class="table table-condensed">
+												<tbody>
+													<tr>
+														<td>	
+															<div class="checkbox">
+																<input type="checkbox" checked="checked" ng-click="onComplete(todo.title, false)">
+																<span class="completeItem">{{todo.title}}</span>
+																
+																<span  class="deletebtn">
+																	<a  class="glyphicon glyphicon-remove-circle" id="delete"ng-click="RemoveItem(todo.title)"></a>
+																</span>	
+															</div>
+														</td>
+													</tr>
+												</tbody>	
+											</table>	
 										</li>
 										
 									</UL>

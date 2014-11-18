@@ -23,21 +23,31 @@
     <!-- Add your site or application content here -->
     <div class="container">
       <div class="header">
-            Color
-
-          <div>
-            
-            
-            <input type="text" class="form-group input-group" ng-model="searchText" placeholder="search">
-            
-            
+          
+          
+          <div class="row">
+            <div class="col-md-4">
+              <b class="lead">TODO</b>
+            </div>
+            <div class="col-md-4 col-md-offset-4">  
+              <div class="form-group">
+                  <input type="text" class="form-control" ng-model="searchText" placeholder="search">
+              </div>  
+            </div>
           </div>
         
       </div>
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-star-empty"></span></p>
+        <div class="row">
+          <div class="col-md-3 col-md-offset-5">
+            <p>
+              
+              <a href="http://www.snehi.co.in">www.snehi.co.in</a>
+            </p>
+          </div>  
+        </div>  
       </div>
     </div>
 

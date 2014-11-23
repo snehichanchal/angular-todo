@@ -78,8 +78,9 @@ body {
   }
 }
   .deletebtn{
+
     float:right;
-    
+   
   }
   .deletebtn:hover #delete{
     text-decoration: none;
@@ -111,18 +112,23 @@ body {
   
  }
  .blue{
-  background-color: rgb(73, 73, 241);
+  background-color: rgb(82, 122, 226);
+  color: white;
  }
  .yellow{
-  background-color: yellow;
+  background-color: rgb(243, 176, 57);
+  color: black;
  }
  .red{
-  background-color: red;
+  background-color: rgb(179, 70, 70);
+  color: rgb(240, 250, 1);
  }
  .green{
-  background-color: green;
+  background-color: rgb(100, 182, 100);
+  color: black;
  }
  .white{
   background-color: white;
+  color: black;
  }
   
